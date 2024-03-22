@@ -20,7 +20,20 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.device = "/dev/vda"; # or "nodev" for efi only
 
-  services.getty.autologinUser = "cal";
+  services.greetd = {
+    enable = true;
+    settings = {
+      initial_session = {
+        user = "cal";
+        command = "sway";
+      };
+      default_session = {
+        user = "cal";
+        command = "bash";
+      };
+      terminal.vt = 2;
+    };
+  };
 
   networking.hostName = "beancal"; # Define your hostname.
   # Pick only one of the below networking options.
@@ -99,6 +112,7 @@
     nano # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
     kitty
+    git
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
