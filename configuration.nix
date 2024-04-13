@@ -14,11 +14,12 @@
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
-  # boot.loader.grub.efiSupport = true;
-  # boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.forcei686 = true;
+  boot.loader.grub.efiInstallAsRemovable = true;
   # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   # Define on which hard drive you want to install Grub.
-  boot.loader.grub.device = "/dev/vda"; # or "nodev" for efi only
+  boot.loader.grub.device = "nodev"; # or "nodev" for efi only
 
   services.greetd = {
     enable = true;
@@ -37,8 +38,8 @@
 
   networking.hostName = "beancal"; # Define your hostname.
   # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  # networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -64,24 +65,6 @@
     };
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-  
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # sound.enable = true;
-  # hardware.pulseaudio.enable = true;
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   services.gnome.gnome-online-accounts.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.gnome.evolution-data-server.enable = true;
@@ -91,18 +74,9 @@
     isNormalUser = true;
     extraGroups = [ ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
-      chromium
       gnome.gnome-weather
       gnome.gnome-calendar
       gnome.gnome-control-center
-    ];
-  };
-
-  users.users.ben = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
-    packages = with pkgs; [
-      firefox
     ];
   };
 
@@ -110,7 +84,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     nano # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
     kitty
     git
   ];
@@ -127,6 +100,7 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.permitRootLogin = "yes";
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];
@@ -158,4 +132,3 @@
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
-

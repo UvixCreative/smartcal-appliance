@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-22.05";
+    home-manager.url = "github:nix-community/home-manager/release-22.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -15,10 +15,9 @@
           home-manager.useUserPackages = true;
           home-manager.users.cal.dconf.settings."org/gnome/desktop/wm/preferences".button-layout = ":";
           home-manager.users.cal.home = {
-            stateVersion = "23.11";
+            stateVersion = "22.05";
             file.".config/sway/config" = {
               source = ./sway.config;
-              enable = true;
             };
           };
         }
