@@ -65,6 +65,8 @@
     };
   };
 
+  programs.dconf.enable = true;
+  services.accounts-daemon.enable = true;
   services.gnome.gnome-online-accounts.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.gnome.evolution-data-server.enable = true;
@@ -74,6 +76,7 @@
     isNormalUser = true;
     extraGroups = [ ]; # Enable ‘sudo’ for the user.
     packages = with pkgs; [
+      chromium
       gnome.gnome-weather
       gnome.gnome-calendar
       gnome.gnome-control-center
@@ -84,6 +87,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     nano # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
     kitty
     git
   ];

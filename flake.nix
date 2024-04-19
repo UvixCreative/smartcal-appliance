@@ -19,6 +19,10 @@
             file.".config/sway/config" = {
               source = ./sway.config;
             };
+            file."scripts/statusbar.sh" = {
+              source = ./statusbar.sh;
+              executable = true;
+            };
           };
         }
       ];
